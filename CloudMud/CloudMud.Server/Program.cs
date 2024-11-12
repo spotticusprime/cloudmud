@@ -1,9 +1,5 @@
 ﻿using CloudMud.Network;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CloudMud.Server
 {
@@ -13,6 +9,13 @@ namespace CloudMud.Server
         {
             SocketServer server = new SocketServer(8080);
             server.Start();
+
+            // Keep the server running by waiting indefinitely.
+            Console.WriteLine("Press Ctrl + C to stop the server...");
+            while (true)
+            {
+                System.Threading.Thread.Sleep(1000);
+            }
         }
     }
 }

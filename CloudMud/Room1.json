@@ -1,0 +1,13 @@
+{
+  "name": "Room 1",
+  "description": "This is the starting room. There are doors leading north.",
+  "items": [
+    {
+      "name": "Rusty Key",
+      "description": "An old rusty key that looks like it could open a door."
+    }
+  ],
+  "exits": {
+    "north": "Room2"
+  }
+}

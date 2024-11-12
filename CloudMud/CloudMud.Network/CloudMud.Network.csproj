@@ -7,6 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\CloudMud.Commands\CloudMud.Commands.csproj" />
+    <ProjectReference Include="..\CloudMud.Core\CloudMud.Core.csproj" />
     <ProjectReference Include="..\CloudMud.Utility\CloudMud.Utility.csproj" />
   </ItemGroup>
 

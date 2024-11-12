@@ -1,0 +1,7 @@
+{
+  "name": "look",
+  "description": "Shows the description of the current room.",
+  "type": "basic",
+  "parameters": [],
+  "response": "You look around and see: {room_description}"
+}

@@ -3,15 +3,29 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35327.3
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CloudMud.Core", "CloudMud.Core\CloudMud.Core.csproj", "{36F96EC9-BD8C-48AC-8CB2-1E1E9BEB8B79}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CloudMud.Core", "CloudMud.Core\CloudMud.Core.csproj", "{36F96EC9-BD8C-48AC-8CB2-1E1E9BEB8B79}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CloudMud.Network", "CloudMud.Network\CloudMud.Network.csproj", "{D6F48384-3A15-4DCE-9DC7-5AA306FF2EBC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CloudMud.Network", "CloudMud.Network\CloudMud.Network.csproj", "{D6F48384-3A15-4DCE-9DC7-5AA306FF2EBC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CloudMud.Commands", "CloudMud.Commands\CloudMud.Commands.csproj", "{5EC3407C-E0F6-413E-8822-A82EAB13FE10}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CloudMud.Commands", "CloudMud.Commands\CloudMud.Commands.csproj", "{5EC3407C-E0F6-413E-8822-A82EAB13FE10}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CloudMud.Server", "CloudMud.Server\CloudMud.Server.csproj", "{CD8EF5CB-6ADF-4D0D-A531-7FBC3C2A2AC9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CloudMud.Server", "CloudMud.Server\CloudMud.Server.csproj", "{CD8EF5CB-6ADF-4D0D-A531-7FBC3C2A2AC9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CloudMud.Utility", "CloudMud.Utility\CloudMud.Utility.csproj", "{AEEE48B4-4D6C-46DF-82D1-B9485607E582}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CloudMud.Utility", "CloudMud.Utility\CloudMud.Utility.csproj", "{AEEE48B4-4D6C-46DF-82D1-B9485607E582}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{76A6ED6D-4EAA-4BC8-9AD6-1FB548FC97AA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Rooms", "Rooms", "{5122BD55-B4F6-45C0-A3C0-C1F54E178E3C}"
+	ProjectSection(SolutionItems) = preProject
+		Room1.json = Room1.json
+		Room2.json = Room2.json
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Commands", "Commands", "{F10858F1-E2A0-4CAC-A855-CEC2250FA7EE}"
+	ProjectSection(SolutionItems) = preProject
+		LookCommand.json = LookCommand.json
+		MoveCommand.json = MoveCommand.json
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -42,6 +56,10 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{5122BD55-B4F6-45C0-A3C0-C1F54E178E3C} = {76A6ED6D-4EAA-4BC8-9AD6-1FB548FC97AA}
+		{F10858F1-E2A0-4CAC-A855-CEC2250FA7EE} = {76A6ED6D-4EAA-4BC8-9AD6-1FB548FC97AA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {AE6C049F-BE01-4191-BF06-6D3BD9F435CD}

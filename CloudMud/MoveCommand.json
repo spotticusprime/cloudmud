@@ -1,0 +1,7 @@
+{
+  "name": "move",
+  "description": "Moves the player in the specified direction.",
+  "type": "basic",
+  "parameters": [ "direction" ],
+  "response": "You move {direction}."
+}

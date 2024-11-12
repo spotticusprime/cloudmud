@@ -1,10 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Sockets;
 using System.Net;
+using System.Net.Sockets;
+using System.IO;
 using System.Text;
 using System.Threading.Tasks;
+using CloudMud.Core;
+using CloudMud.Commands;
+using System.Collections.Generic;
 
 namespace CloudMud.Network
 {
@@ -12,10 +14,24 @@ namespace CloudMud.Network
     {
         private TcpListener _server;
         private bool _isRunning;
+        private GameWorld _gameWorld;
 
         public SocketServer(int port)
         {
             _server = new TcpListener(IPAddress.Any, port);
+            _gameWorld = new GameWorld(); // Initialize GameWorld
+
+            // Load rooms from JSON files
+            var room1 = Room.LoadFromFile("Scripts/Rooms/Room1.json");
+            var room2 = Room.LoadFromFile("Scripts/Rooms/Room2.json");
+
+            // Connect rooms based on exits
+            room1.Exits["north"] = room2; // Use the actual room object
+            room2.Exits["south"] = room1;
+
+
+            _gameWorld.AddRoom(room1);
+            _gameWorld.AddRoom(room2);
         }
 
         public void Start()
@@ -39,19 +55,48 @@ namespace CloudMud.Network
         private async void HandleClient(TcpClient client)
         {
             NetworkStream stream = client.GetStream();
-            byte[] buffer = new byte[1024];
-            int bytesRead;
+            StreamReader reader = new StreamReader(stream, Encoding.ASCII);
+            StreamWriter writer = new StreamWriter(stream, Encoding.ASCII) { AutoFlush = true };
 
-            while ((bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length)) != 0)
+            Player player = new Player($"Player_{Guid.NewGuid()}");
+            player.CurrentRoom = _gameWorld.Rooms[0]; // Start in the first room
+            _gameWorld.AddPlayer(player);
+
+            CommandProcessor commandProcessor = new CommandProcessor();
+            commandProcessor.RegisterCommand(new LookCommand(player));
+            commandProcessor.RegisterCommand(new MoveCommand(player));
+            commandProcessor.RegisterCommand(new TakeCommand(player));
+            commandProcessor.RegisterCommand(new DropCommand(player));
+
+            Console.WriteLine($"New player connected: {player.Name}");
+
+            try
             {
-                string message = Encoding.ASCII.GetString(buffer, 0, bytesRead);
-                Console.WriteLine($"Received: {message}");
-                byte[] response = Encoding.ASCII.GetBytes("Message received\n");
-                await stream.WriteAsync(response, 0, response.Length);
-            }
+                while (_isRunning)
+                {
+                    string? message = await reader.ReadLineAsync();
+                    if (message == null)
+                    {
+                        break;
+                    }
 
-            client.Close();
-            Console.WriteLine("Player disconnected");
+                    Console.WriteLine($"Received from {player.Name}: {message}");
+
+                    // Process command using the command processor.
+                    string response = commandProcessor.ProcessCommand(message.Trim());
+                    await writer.WriteLineAsync(response);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error handling client: {ex.Message}");
+            }
+            finally
+            {
+                _gameWorld.Players.Remove(player);
+                client.Close();
+                Console.WriteLine($"Player disconnected: {player.Name}");
+            }
         }
     }
 }

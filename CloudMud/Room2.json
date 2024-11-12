@@ -1,0 +1,8 @@
+{
+  "name": "Room 2",
+  "description": "This is the northern room. There is a door leading south.",
+  "items": [],
+  "exits": {
+    "south": "Room1"
+  }
+}
